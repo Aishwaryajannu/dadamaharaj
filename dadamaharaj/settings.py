@@ -11,21 +11,18 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-yfx7wycxs=74k^^!^(9im1sacu&uc^2+sj2fzb_-=u(x0ie29y'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','6cbf-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app', '1a05-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = [
+    "https://1a05-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app",
+    "https://6cbf-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app",
+
+]
 
 
 # Application definition
@@ -58,7 +55,7 @@ ROOT_URLCONF = 'dadamaharaj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,6 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'dadamaharaj.wsgi.application'
+
 
 
 # Database

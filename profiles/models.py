@@ -1,36 +1,37 @@
-from django.db import models
-from django.utils.text import slugify
+import os
 import qrcode
+from django.db import models
+from django.conf import settings
 from io import BytesIO
 from django.core.files import File
 
 class Profile(models.Model):
+    username = models.SlugField(unique=True)
     full_name = models.CharField(max_length=100)
-    username = models.SlugField(unique=True, blank=True)  # New field for clean URL
     designation = models.CharField(max_length=100)
-    phone = models.CharField(max_length=20)
+    phone = models.CharField(max_length=15)
     email = models.EmailField()
-    linkedin = models.URLField()
-    location = models.CharField(max_length=100)
+    linkedin = models.CharField(max_length=100)
+    location = models.TextField()
     image = models.ImageField(upload_to="profile_images/", null=True, blank=True)
-    qr_code = models.ImageField(upload_to='qr_codes/', blank=True)
+    qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        if not self.username:
-            self.username = slugify(self.full_name)
-        super().save(*args, **kwargs)
-        qr_url = f"http://localhost:5173/{self.username}/"
-        qr = qrcode.make(qr_url)
+    def get_profile_url(self):
+        return f"https://1a05-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app/{self.username}/"
 
-        # Save image to memory buffer
+    def generate_qr(self):
+        url = self.get_profile_url()
+        qr = qrcode.make(url)
         buffer = BytesIO()
         qr.save(buffer, format='PNG')
-        file_name = f'{self.username}_qr.png'
+        filename = f"{self.username}_qr.png"
+        filebuffer = File(buffer, name=filename)
+        self.qr_code.save(filename, filebuffer, save=False)
 
-        # Save to the ImageField without prompting
-        self.qr_code.save(file_name, File(buffer), save=False)
-
-        # Now save again with QR image
+    def save(self, *args, **kwargs):
+    
+        if not self.qr_code:
+            self.generate_qr()
         super().save(*args, **kwargs)
 
     def __str__(self):
