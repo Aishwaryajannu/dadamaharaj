@@ -20,11 +20,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
-    "https://babamaharaj-1rurfzp88-aishwaryajannus-projects.vercel.app",
+    "https://babamaharaj-q0nn7owxr-aishwaryajannus-projects.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://babamaharaj-1rurfzp88-aishwaryajannus-projects.vercel.app",
+    "https://babamaharaj-q0nn7owxr-aishwaryajannus-projects.vercel.app",
 ]
 
 
