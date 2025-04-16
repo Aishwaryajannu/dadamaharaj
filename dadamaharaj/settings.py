@@ -12,17 +12,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-yfx7wycxs=74k^^!^(9im1sacu&uc^2+sj2fzb_-=u(x0ie29y'
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','6cbf-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app', '1a05-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app']
-CSRF_TRUSTED_ORIGINS = [
-    "https://1a05-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app",
-    "https://6cbf-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app",
-
-]
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['*']
 
 
 # Application definition
@@ -48,6 +45,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'dadamaharaj.urls'
@@ -117,7 +115,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CORS_ALLOW_ALL_ORIGINS = True  # or limit by frontend domain
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

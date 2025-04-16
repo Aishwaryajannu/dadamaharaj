@@ -17,7 +17,7 @@ class Profile(models.Model):
     qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
 
     def get_profile_url(self):
-        return f"https://1a05-2409-40f2-116a-be68-105e-b2a5-2f0e-7ae.ngrok-free.app/{self.username}/"
+        return f"https://dadamaharaj.onrender.com/{self.username}/"
 
     def generate_qr(self):
         url = self.get_profile_url()

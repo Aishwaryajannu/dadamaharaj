@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: dadamaharaj-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn dadamaharaj.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: dadamaharaj.settings
+      - key: SECRET_KEY
+        value: django-insecure-yfx7wycxs=74k^^!^(9im1sacu&uc^2+sj2fzb_-=u(x0ie29y
+      - key: ALLOWED_HOSTS
+        value: https://dadamaharaj.onrender.com
