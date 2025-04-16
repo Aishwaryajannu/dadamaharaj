@@ -19,7 +19,13 @@ SECRET_KEY = 'django-insecure-yfx7wycxs=74k^^!^(9im1sacu&uc^2+sj2fzb_-=u(x0ie29y
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['*']
+CORS_ALLOWED_ORIGINS = [
+    "https://babamahraj.onrender.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://babamahraj.onrender.com",
+]
 
 
 # Application definition
